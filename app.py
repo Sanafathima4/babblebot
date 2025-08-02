@@ -82,7 +82,15 @@ async def get_asset(filename: str):
     file_path = os.path.join("assets", filename)
     if not os.path.exists(file_path):
         raise HTTPException(status_code=404, detail="File not found")
-    return StreamingResponse(open(file_path, "rb"), media_type="application/octet-stream")
+
+    response = StreamingResponse(open(file_path, "rb"), media_type="application/octet-stream")
+    
+    # Disable caching
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+
+    return response
 # if __name__ == "__main__":
 
     # uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
