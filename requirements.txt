@@ -1,0 +1,6 @@
+uvicorn
+fastapi
+elevenlabs
+python-dotenv
+pydantic
+
