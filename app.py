@@ -65,12 +65,13 @@ Lala:"""
         response.raise_for_status()
         response_data = response.json()
         lala_reply = response_data["choices"][0]["message"]["content"]
-        audio=text_to_speech_elevenlabs(lala_reply, "uq8azAkk0wBebQXhvpc8", "assets/elevenlabs_output.mp3")
+        uid = random.randint(1000, 9999)
+        audio=text_to_speech_elevenlabs(lala_reply, "uq8azAkk0wBebQXhvpc8", f"assets/{uid}elevenlabs_output.mp3")
         return JSONResponse({
             "working": working_message,
             "reply": lala_reply.strip(),
             "length": len(lala_reply.strip()),
-            "audio": "assets/elevenlabs_output.mp3"
+            "audio": f"assets/{uid}elevenlabs_output.mp3"
         })
     except requests.exceptions.RequestException as e:
         raise HTTPException(status_code=500, detail=f"Network error: {str(e)}")
