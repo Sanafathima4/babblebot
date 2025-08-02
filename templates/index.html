@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BabbleBot y</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body { height: 100%; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: #fff8f0;
+            border-radius: 22px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+            padding: 32px 24px 24px 24px;
+            width: 350px;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lala-label {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #f4845f;
+            margin: 10px 0 18px 0;
+            text-align: center;
+        }
+        .outfit-btns {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .outfit-btns button {
+            background: #f7b267;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .outfit-btns button:hover {
+            background: #f4845f;
+        }
+        .baby-character {
+            width: 160px;
+            height: 220px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .chat-box {
+            background: #fff;
+            border-radius: 12px;
+            min-height: 70px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            box-shadow: 0 2px 8px #f3e1c7;
+            font-size: 1.08rem;
+            color: #7a4c16;
+            width: 100%;
+            max-width: 100%;
+            word-break: break-word;
+        }
+        .input-row {
+            display: flex;
+            gap: 0.5rem;
+            width: 100%;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: 1px solid #e0c3a0;
+            font-size: 1rem;
+        }
+        button[type="submit"] {
+            background: #f7b267;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button[type="submit"]:hover {
+            background: #f4845f;
+        }
+        /* Baby SVG Animations */
+        @keyframes sway {
+            0% { transform: rotate(-3deg) scale(1.01);}
+            50% { transform: rotate(3deg) scale(1.04);}
+            100% { transform: rotate(-3deg) scale(1.01);}
+        }
+        @keyframes blink {
+            0%, 90%, 100% { opacity: 1; }
+            92%, 98% { opacity: 0; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0);}
+            50% { transform: translateY(-6px);}
+        }
+        .lala-svg {
+            width: 140px;
+            height: 200px;
+            animation: sway 2.7s infinite ease-in-out;
+        }
+        .lala-eye {
+            animation: blink 4s infinite;
+            transform-origin: center;
+        }
+        .lala-leg {
+            animation: bounce 1.7s infinite;
+        }
+        .lala-leg.right {
+            animation-delay: 0.85s;
+        }
+        .lala-mouth {
+            transition: all 0.2s;
+            transform-origin: center;
+        }
+        .talking .lala-mouth {
+            animation: talk 0.3s infinite alternate;
+        }
+        @keyframes talk {
+            0% { transform: scaleY(1);}
+            100% { transform: scaleY(1.5);}
+        }
+        @media (max-width: 500px) {
+            .container { width: 98vw; padding: 10px 2vw; }
+            .baby-character { width: 120px; height: 160px;}
+            .lala-svg { width: 100px; height: 140px;}
+        }
+        .voice-btn {
+            margin-top: 0.5rem;
+            background: #feb47b;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.4rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .voice-btn:hover {
+            background: #ff7e5f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="lala-label">Lala!!!</div>
+        <div class="outfit-btns">
+            <button onclick="setOutfit('pink')">Pink Dress</button>
+            <button onclick="setOutfit('blue')">Blue Onesie</button>
+            <button onclick="setOutfit('green')">Green Pajamas</button>
+        </div>
+        <div class="baby-character">
+            <svg class="lala-svg" id="lala-svg" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Head -->
+                <ellipse cx="60" cy="60" rx="40" ry="40" fill="#ffe0b2"/>
+                <!-- Ears -->
+                <ellipse cx="20" cy="60" rx="8" ry="12" fill="#ffe0b2"/>
+                <ellipse cx="100" cy="60" rx="8" ry="12" fill="#ffe0b2"/>
+                <!-- Eyes -->
+                <ellipse cx="45" cy="60" rx="7" ry="10" fill="#fff"/>
+                <ellipse cx="75" cy="60" rx="7" ry="10" fill="#fff"/>
+                <ellipse class="lala-eye" cx="45" cy="62" rx="3" ry="4" fill="#7a4c16"/>
+                <ellipse class="lala-eye" cx="75" cy="62" rx="3" ry="4" fill="#7a4c16"/>
+                <!-- Cheeks -->
+                <ellipse cx="40" cy="80" rx="6" ry="3" fill="#ffb6b6" opacity="0.7"/>
+                <ellipse cx="80" cy="80" rx="6" ry="3" fill="#ffb6b6" opacity="0.7"/>
+                <!-- Nose -->
+                <ellipse cx="60" cy="75" rx="3" ry="2" fill="#f4845f"/>
+                <!-- Mouth -->
+                <path class="lala-mouth" id="lala-mouth" d="M50 85 Q60 95 70 85" stroke="#f4845f" stroke-width="3" fill="none"/>
+                <!-- Dimples -->
+                <ellipse cx="52" cy="88" rx="2" ry="1" fill="#f4845f"/>
+                <ellipse cx="68" cy="88" rx="2" ry="1" fill="#f4845f"/>
+                <!-- Body (outfit) -->
+                <g id="lala-outfit"></g>
+                <!-- Arms -->
+                <rect x="10" y="110" width="15" height="50" rx="10" fill="#ffe0b2" transform="rotate(-15 10 110)"/>
+                <rect x="95" y="110" width="15" height="50" rx="10" fill="#ffe0b2" transform="rotate(15 95 110)"/>
+                <!-- Legs -->
+                <rect class="lala-leg" x="40" y="170" width="12" height="30" rx="8" fill="#ffe0b2"/>
+                <rect class="lala-leg right" x="68" y="170" width="12" height="30" rx="8" fill="#ffe0b2"/>
+            </svg>
+        </div>
+        <div class="chat-box" id="chat-box">👋 Goo goo ga ga! Hi there! I'm Lala the talking baby! What's your name?</div>
+        <form id="chat-form" autocomplete="off" style="width:100%;">
+            <div class="input-row">
+                <input type="text" id="user-input" placeholder="Type your message..." required />
+                <button type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+
+    <audio id="lala-voice" src=""></audio>
+
+    <script>
+        const outfits = {
+            pink: `<ellipse cx="60" cy="130" rx="35" ry="45" fill="#ffb6c1"/>
+                   <ellipse cx="60" cy="120" rx="18" ry="15" fill="#fff"/>
+                   <ellipse cx="60" cy="175" rx="18" ry="10" fill="#ffb6c1"/>`,
+            blue: `<ellipse cx="60" cy="130" rx="35" ry="45" fill="#8ecae6"/>
+                   <ellipse cx="60" cy="120" rx="18" ry="15" fill="#fff"/>
+                   <ellipse cx="60" cy="175" rx="18" ry="10" fill="#8ecae6"/>`,
+            green: `<ellipse cx="60" cy="130" rx="35" ry="45" fill="#b7e4c7"/>
+                    <ellipse cx="60" cy="120" rx="18" ry="15" fill="#fff"/>
+                    <ellipse cx="60" cy="175" rx="18" ry="10" fill="#b7e4c7"/>`
+        };
+        function setOutfit(color) {
+            document.getElementById('lala-outfit').innerHTML = outfits[color];
+        }
+        setOutfit('pink');
+
+        const chatBox = document.getElementById('chat-box');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const babyMouth = document.getElementById('lala-mouth');
+        const audio = document.getElementById('lala-voice');
+        let lastLalaReply = "👋 Goo goo ga ga! Hi there! I'm Lala the talking baby! What's your name?";
+
+        function addMessage(message, isUser) {
+            chatBox.innerHTML = (isUser ? `<b>You:</b> ` : `<b>Lala:</b> `) + message;
+        }
+
+        function startTalking() {
+            babyMouth.classList.add('talking');
+        }
+
+        function stopTalking() {
+            babyMouth.classList.remove('talking');
+        }
+
+        // Optional: auto animate mouth while audio is playing
+        audio.onplay = startTalking;
+        audio.onended = stopTalking;
+
+        chatForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                userInput.value = '';
+                startTalking();
+                try {
+                    const res = await fetch('/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message })
+                    });
+                    const data = await res.json();
+                    data.reply = data.reply.replace(/\[.*?\]/g, '').trim();
+                    if (data.reply) {
+                        setTimeout(() => {
+                            addMessage(data.reply, false);
+                            lastLalaReply = data.reply;
+                            audio.src = `/${data.audio}`;
+                            audio.play();
+                        }, 900 + Math.random() * 500);
+                    } else {
+                        stopTalking();
+                    }
+                } catch (error) {
+                    console.error("Chat error:", error);
+                    stopTalking();
+                }
+            }
+        });
+
+        userInput.focus();
+    </script>
+</body>
+</html>
