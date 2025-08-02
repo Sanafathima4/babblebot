@@ -3,4 +3,4 @@ fastapi
 elevenlabs
 python-dotenv
 pydantic
-
+jinja2 
