@@ -41,48 +41,31 @@ pip install -r requirements.txt
 unicorn app:app -reload
 
 ### Project Documentation
-For Software:
-
+For Software:The chatbot is seen as useless because it responds like a baby, meaning its answers are simplistic and lack depth. It may not understand context or nuances, failing to provide meaningful insights. This limits its effectiveness in helping users with their queries or concerns, making it seem immature.and always talks about it art5 project
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-Add caption explaining what this shows
 
-![Screenshot2](Add  screenshot 2 here with proper name)
-Add caption explaining what this shows
+![Screenshot1](https://github.com/Sanafathima4/babblebot/raw/main/assets/screenshot1.png)
+This shows the homepage UI of the BabbleBot app with the animated baby avatar.
 
-![Screenshot3](Add screenshot 3 here with proper name)
-Add caption explaining what this shows
+![Screenshot2](https://github.com/Sanafathima4/babblebot/raw/main/assets/screenshot2.png)
+This displays the user interacting with the baby bot via the chat interface.
+
+![Screenshot3](https://github.com/Sanafathima4/babblebot/raw/main/assets/screenshot3.png)
+This image shows how different buttons trigger baby sounds and expressions.
 
 # Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-Add caption explaining your workflow
 
-For Hardware:
 
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-Add caption explaining connections
-
-![Schematic](Add your schematic diagram here)
-Add caption explaining the schematic
-
-# Build Photos
-![Components](Add photo of your components here)
-List out all components shown
-
-![Build](Add photos of build process here)
-Explain the build steps
-
-![Final](Add photo of final product here)
-Explain the final build
+user input text 
+response created using ai
+audio created from response using elevenlabs
 
 ### Project Demo
 # Video
-[Add your demo video link here]
+https://drive.google.com/file/d/1zze3BqvDIQCF-sDlF0FU6yFIlTNUF5Sn/view?usp=drive_link
 the video  demonstrates hiw our babychatbot works with quirky low funny squishy voice and baby 's cloth colour can be changed
 
-# Additional Demos
-[Add any extra demo materials/links]
+
 
 ## Team Contributions
 - SanaFathima.M: build  project
