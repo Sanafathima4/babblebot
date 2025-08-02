@@ -83,5 +83,6 @@ async def get_asset(filename: str):
     if not os.path.exists(file_path):
         raise HTTPException(status_code=404, detail="File not found")
     return StreamingResponse(open(file_path, "rb"), media_type="application/octet-stream")
-if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+# if __name__ == "__main__":
+
+    # uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
